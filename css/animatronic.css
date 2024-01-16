@@ -424,6 +424,7 @@
 @media (max-width: 768px) {
   .aboutUs {
     padding-top: 200px !important;
+   
   }
   .aboutUs__buttons {
     -ms-flex-wrap: wrap;
@@ -1442,13 +1443,21 @@
   }
 }
 @media (max-width: 700px) {
+  .rock.hide{
+    margin-bottom: 1800px;
+  }
+  .aboutUs.hide{
+    display: none !important;
+  }
   .we_provide {
     padding-top: 100px !important;
+    
   }
   .aboutUs {
     padding-top: 150px !important;
     padding-bottom: 100px;
     margin-bottom: 30px;
+   
   }
   .aboutUs__text {
     font-size: 14px;
