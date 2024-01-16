@@ -1443,12 +1443,7 @@
   }
 }
 @media (max-width: 700px) {
-  .rock.hide{
-    margin-bottom: 1800px;
-  }
-  .aboutUs.hide{
-    display: none !important;
-  }
+ 
   .we_provide {
     padding-top: 100px !important;
     

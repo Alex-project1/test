@@ -3,7 +3,7 @@
 
 window.addEventListener('scroll', ()=>{
   const rockBlok = document.querySelector('.rock');
-  const aboutUsBlock = document.querySelector('.aboutUs');
+  const aboutUsBlock = document.querySelector('.we_provide ');
   rockBlok.classList.remove('hide')
   aboutUsBlock.classList.remove('hide')
   console.log('scroll');
