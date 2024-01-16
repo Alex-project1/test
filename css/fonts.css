@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "Permanent Marker";
+    src: url("../fonts/Permanent Marker 400.ttf?73b4d2d7c9141a94b91ca5f7113a91ea");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../fonts/Bebas Neue 400.ttf?aa140796def071b76415e7d4b04b6b84");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../fonts/Bebas Neue 700.ttf?ea0a2d99a89950317a4fcee40adc8dfd");
+    font-weight: 700;
+}
+@font-face {
+    font-family: "Marker Felt";
+    src: url("../fonts/Marker Felt 400.ttf?368f5cecd534fada9271ded36cebf3f7");
+}
+@font-face {
+    font-family: "Helvetica";
+    src: url("../fonts/Helvetica 400.ttf?5250b533fe56a78652c73cc212a5f1c9");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Helvetica";
+    src: url("../fonts/Helvetica 700.ttf?c16c91c576f997693a920e41bbab0131");
+    font-weight: 700;
+}
