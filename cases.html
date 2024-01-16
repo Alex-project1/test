@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boost</title>
+  <link rel="stylesheet" href="css/fonts.css?v=1.3.8">
+  <link rel="stylesheet" href="css/style.css?v=1.3.8">
+
+</head>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!--                                                   -->
+<!--       ___    _____   _____      _      __  __     -->
+<!--      / _ \  |_   _| | ____|    / \    |  \/  |    -->
+<!--     | | | |   | |   |  _|     / _ \   | |\/| |    -->
+<!--     | |_| |   | |   | |___   / ___ \  | |  | |    -->
+<!--      \__\_\   |_|   |_____| /_/   \_\ |_|  |_|    -->
+<!--                                                   -->
+<!--             Partners of boost.app                 -->
+<!--                URL: QTeam.dev                     -->
+<!--                                                   -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<body id="cases">
+
+  <div class="rock no-bg">
+    <header>
+      <a href="/" class="logo">
+        <div class="wrap el"><img src="img/header/logo/wrap.png"></div>
+        <div class="img el"><img src="img/header/logo/logo.png"></div>
+        <div class="txt el"><img src="img/header/logo/text.svg"></div>
+      </a>
+      <div class="links">
+        <a href="sources.html">SOURCES</a>
+        <a class="link-active cases" href="cases.html">CASES</a>
+        <a href="blog.html">BLOG</a>
+        <a href="contacts.html">CONTACTS</a>
+      </div>
+      <div class="nw">
+        <div class="wrap el"><img src="img/header/nw/wrap.png"></div>
+        <div class="el">
+          <div class="as">
+            <a href="#" class="social-link skype"></a>
+            <a href="#" class="social-link tg"></a>
+            <a href="#" class="social-link in"></a>
+            <a href="#" class="social-link inst"></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="mob_header">
+      <a href="/" class="logo">
+        <img src="img/logo-sm.png">
+      </a>
+      <div id="menu_toggle" class="mob_header-toggle menu-toggler"></div>
+
+    </div>
+    <div id="mobile_menu" class="mobile-menu">
+      <ul>
+        <li><a class="mobile-menu-link" href="sources.html">SOURCES</a></li>
+        <li><a class="mobile-menu-link" href="cases.html">CASES</a></li>
+        <li><a class="mobile-menu-link" href="blog.html">BLOG</a></li>
+        <li><a class="mobile-menu-link" href="contacts.html">CONTACTS</a></li>
+
+      </ul>
+      <div class="social-links">
+        <a href="#" class="social-link skype"></a>
+        <a href="#" class="social-link tg"></a>
+        <a href="#" class="social-link in"></a>
+        <a href="#" class="social-link inst"></a>
+      </div>
+      <svg class="mobile-menu-icon" width="21" height="15" viewBox="0 0 21 15" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M18.8723 0H2.9487C1.84898 0 0.968204 0.812318 0.968204 1.81524L0.958252 12.7066C0.958252 13.7096 1.84898 14.5219 2.9487 14.5219H18.8723C19.972 14.5219 20.8627 13.7096 20.8627 12.7066V1.81524C20.8627 0.812318 19.972 0 18.8723 0ZM18.8723 12.7066H2.9487V3.63047L10.9105 8.16856L18.8723 3.63047V12.7066ZM10.9105 6.35332L2.9487 1.81524H18.8723L10.9105 6.35332Z"
+          fill="white" />
+      </svg>
+      <p class="mobile-menu-text">
+        for questions about employment<br>
+        <a href="mailto:hr@boost.app">hr@boost.app</a><br>
+
+        for all requests<br>
+        <a href="welcome@boost.app">welcome@boost.app</a>
+
+      </p>
+    </div>
+  </div>
+  <div class="block-header">
+    <div class="block-header__text">
+      <p>CASES</p>
+    </div>
+  </div>
+  <div class="block-with-bg">
+    <div id="app">
+      <div class="case-tabs">
+        <div class="case-tab" @click="activeTab = index" :class="{'tab-active':activeTab===index}"
+          v-for="(tab,index) in tabs" :key="index">
+          <div class="tab-bg">
+            <img draggable="false" src="img/active-tab.png" alt="">
+          </div>
+          <div class="case-tab__text">
+            <p class="top">{{tab.top}}</p>
+            <p class="bottom">{{tab.bottom}}</p>
+          </div>
+        </div>
+      </div>
+      <div v-if="tabs[activeTab].icons.length>0" class="case-tab-content">
+        <div class="case-tab-content-wrapper">
+          <div class="icons-wrapper swiper">
+            <div class="icons swiper-wrapper">
+              <div class="case-icon swiper-slide" :class="{'icon-active': activeIcon === index}"
+                v-for="(icon,index) in tabs[activeTab].icons" @click="handleActiveIcon(index)" :key="index">
+                <div class="case-icon-wrap">
+                  <div class="icon-image">
+                    <img draggable="false" :src="`img/cases/tab0/icons/${index}.png`" alt="">
+                  </div>
+                  <p class="text">{{icon.name}}</p>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="sw-nav-wrapper">
+              <button class="sw-nav-button swiper-button-prev">pr</button>
+              <button class="sw-nav-button swiper-button-next">nt</button>
+            </div> -->
+          </div>
+
+          <div class="image">
+            <img :src="`img/cases/tab0/images/img${activeIcon}.png`" alt="">
+          </div>
+        </div>
+
+      </div>
+      <div v-else class="case-tab-content ">
+        <div class="case-tab-content-wrapper coming">
+          <p>Coming soon...</p>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer_and_form_header">
+          <div class="header">
+            <div data-aos="flip-up" data-aos-duration="600" class="text_wrapper element">
+              <img src="img/footer_and_form/header_text_wrapper.svg">
+            </div>
+            <div class="text_wrapper_background element">
+              <img src="img/footer_and_form/header_text_wrapper_background.svg">
+            </div>
+            <div class="header_text_decor element">
+              <img data-aos="zoom-in" data-aos-duration="300" data-aos-delay="200"
+                src="img/footer_and_form/header_text_decor.svg">
+            </div>
+            <div class="text element element">
+              <div data-aos="flip-up" data-aos-duration="600" class="wrap">Contacts</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wrapper">
+          <div class="footer-form">
+            <form>
+              <div class="left">
+                <label>Name</label>
+                <input type="text">
+                <label>Last name</label>
+                <input type="text">
+                <label>Email</label>
+                <input type="text">
+                <label>Phone</label>
+                <input type="text">
+              </div>
+              <div class="right">
+                <label>
+                  Your message
+                </label>
+                <textarea></textarea>
+                <div class="right_row">
+                  <div class="">
+                    <label class="checkbox-container">I consent to the processing of my personal data for marketing
+                      purposes in accordance with the privacy policy
+                      <input type="checkbox" checked="checked">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="">
+                    <button type="submit" class="plain-btn">send</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="footer-contacts">
+            <img data-aos="zoom-in-down" data-aos-duration="400" data-aos-delay="400"
+              src="img/footer_and_form/hello.png" alt="">
+            <svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M21.7879 0.399902H2.58787C1.26187 0.399902 0.199866 1.4739 0.199866 2.7999L0.187866 17.1999C0.187866 18.5259 1.26187 19.5999 2.58787 19.5999H21.7879C23.1139 19.5999 24.1879 18.5259 24.1879 17.1999V2.7999C24.1879 1.4739 23.1139 0.399902 21.7879 0.399902ZM21.7879 17.1999H2.58787V5.1999L12.1879 11.1999L21.7879 5.1999V17.1999ZM12.1879 8.7999L2.58787 2.7999H21.7879L12.1879 8.7999Z"
+                fill="black" />
+            </svg>
+            <p><span>for questions about employment</span>
+              <a href="mailto:hr@boost.app</p>">hr@boost.app</a>
+            </p>
+            <p><span>for all requests</span>
+              <a href="mailto:welcome@boost.app</p>">welcome@boost.app</a>
+            </p>
+
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="footer-bottom-wrapper">
+            <div class="footer-bottom-menu links">
+              <a href="sources.html">SOURCES</a>
+              <a href="cases.html">CASES</a>
+              <a href="blog.html">BLOG</a>
+              <a href="contacts.html">CONTACTS</a>
+            </div>
+            <div class="social-links">
+              <a href="#"><img src="img/header/nw/skype.svg"></a>
+              <a href="#"><img src="img/header/nw/tg.svg"></a>
+              <a href="#"><img src="img/header/nw/in.svg"></a>
+              <a href="#"><img src="img/header/nw/isnt.svg"></a>
+
+            </div>
+            <div class="">
+              <a href="#"><img src="img/footer_and_form/footer-logo.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+
+
+
+
+
+
+
+  <script src="js/main.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/animatronic.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          activeTab: 0,
+          activeIcon: 0,
+          tabs: [
+            {
+              top: 'CASES', bottom: 'E-COMM',
+              icons: [
+                { name: 'Bolt Car' },
+                { name: 'Farfetch' },
+                { name: 'Adidas' },
+                { name: 'Joom' },
+                { name: 'Zalora' },
+                { name: 'Shopee' },
+                { name: 'Sephora' },
+                { name: 'Careem' },
+                { name: 'Bolt Food' },
+              ]
+            },
+            { top: 'CASES', bottom: 'Fintech', icons: [] },
+            { top: 'CASES', bottom: 'Casino', icons: [] },
+            { top: 'CASES', bottom: 'Betting', icons: [] },
+          ],
+          swiper: undefined,
+          initSwiper: false
+        }
+      },
+      mounted() {
+        const swiperCard = () => {
+          if (window.innerWidth <= 768) {
+            if (!this.init) {
+              this.init = true
+
+              setTimeout(() => {
+                this.swiper = new Swiper('.swiper', {
+                  direction: 'horizontal',
+                  slidesPerView: 5,
+                  centeredSlides: true,
+                  spaceBetween: 10,
+                  loop: false,
+                  navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                  },
+                })
+              }, 0)
+            }
+          } else if (this.init) {
+            this.swiper.destroy()
+            this.init = false
+          }
+        }
+
+        swiperCard()
+        window.addEventListener('resize', swiperCard)
+      },
+      methods: {
+        handleActiveIcon(idx) {
+          this.activeIcon = idx
+
+          if (this.init)
+            this.swiper?.slideTo(idx)
+        }
+      },
+    }).mount('#app')
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+</body>
+
+</html>
