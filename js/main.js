@@ -1,15 +1,7 @@
 /******/ (() => { // webpackBootstrap
 
 
-window.addEventListener('scroll', ()=>{
-  const rockBlok = document.querySelector('.rock');
-  const aboutUsBlock = document.querySelector('.we_provide ');
-  rockBlok.classList.remove('hide')
-  aboutUsBlock.classList.remove('hide')
-  console.log('scroll');
-  
-  
-})
+
   
 /******/ 	var __webpack_modules__ = ({
 
