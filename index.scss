@@ -1,0 +1,47 @@
+
+.result{
+  width: 350px;
+  padding: 10px;
+  border: 1px solid gray;
+  margin: 10px auto;
+  span{
+      font-weight: 900;
+  }
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#tokenList {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.token {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.token:last-child {
+  border-bottom: none;
+}
