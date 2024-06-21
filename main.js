@@ -4,7 +4,7 @@ console.log(ethers);
 
 //
 const address = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"; //https://etherscan.io/address/0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D#readContract
-
+const examAddress = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 //  вкладка code https://etherscan.io/address/0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D#code
 const abi = [
   {
@@ -362,51 +362,169 @@ const abi = [
   },
   { stateMutability: "payable", type: "receive" },
 ];
+const examAbi = [
+  {
+    inputs: [
+      { internalType: "address", name: "_feeToSetter", type: "address" },
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token0",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token1",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "pair",
+        type: "address",
+      },
+      { indexed: false, internalType: "uint256", name: "", type: "uint256" },
+    ],
+    name: "PairCreated",
+    type: "event",
+  },
+  {
+    constant: true,
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "allPairs",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "allPairsLength",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "tokenA", type: "address" },
+      { internalType: "address", name: "tokenB", type: "address" },
+    ],
+    name: "createPair",
+    outputs: [{ internalType: "address", name: "pair", type: "address" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "feeTo",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "feeToSetter",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      { internalType: "address", name: "", type: "address" },
+      { internalType: "address", name: "", type: "address" },
+    ],
+    name: "getPair",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    payable: false,
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [{ internalType: "address", name: "_feeTo", type: "address" }],
+    name: "setFeeTo",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      { internalType: "address", name: "_feeToSetter", type: "address" },
+    ],
+    name: "setFeeToSetter",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
 
 // с сайта https://etherscan.io/address/0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D#code
 // Ethereum Mainnet выбираем актуальное
 const provider = new ethers.JsonRpcProvider("https://eth.llamarpc.com");
 // создаем контракт с данными выше
 const contract = new ethers.Contract(address, abi, provider);
+const examContract = new ethers.Contract(examAddress, examAbi, provider);
+console.log("examContract:", examContract);
 
 // функция расчета
-async function getTokensForUSDT(usdtAmount) {
+async function getTokensForUSDT(usdtAmount, contractAdress, decimals) {
   try {
     // количество монет , которую отдаем и ее количество нулей (где узнать количество нулей?)
-    const amountIn = ethers.parseUnits(usdtAmount.toString(), 6);
+    const amountIn = ethers.parseUnits(usdtAmount.toString(), decimals);
     // 1 адрес юсдт (отдаем) 0xdAC17F958D2ee523a2206206994597C13D831ec7
     // 2 адрес ефира (получаем) 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
-    const path = [
-      "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-      "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-    ];
+    const path = ["0xdAC17F958D2ee523a2206206994597C13D831ec7", contractAdress];
     // расчитываем сделку
     const amounts = await contract.getAmountsOut(amountIn, path);
 
     const result = ethers.formatEther(amounts[1]);
-    console.log(result);
+    // console.log(result);
 
     return result;
   } catch (error) {
+    console.log("contractAdress abort", contractAdress);
+
     console.error(error);
   }
 }
 
 const resultInner = document.querySelectorAll(".result");
-const difference = document.querySelector(".difference");
 let allResults = [];
-let usdtAmount = 100;
 
 resultInner.forEach(async (div, index) => {
   let amount = 100 * (index + 1);
-  let result = await getTokensForUSDT(amount);
+  let result = await getTokensForUSDT(
+    amount,
+    "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+  );
   console.log(result);
   allResults.push(result);
   div.innerHTML = ` <span>${amount} </span>  usdt =  <span> ${result}</span> ethers`;
 });
 
 //* *-*-*-*-*-*-*-*-*-*-*-*-*- *- *- *- * -* -* -* -* - *- *- * -* -* -* - *- *
-document.getElementById("fetchTokens").addEventListener("click", fetchTokens);
+
 let uniqueCoingeckoIdEth = [];
 let uniqueCoingeckoIdBsc = [];
 let sharedTokens = [];
@@ -415,24 +533,64 @@ function fetchTokens() {
   fetch("https://price-api.mayan.finance/v3/tokens")
     .then((response) => response.json())
     .then((data) => {
-        console.log(data);
-        
-        displayTokens(data);
+      // console.log('dataaa',data);
+
+      displayTokens(data);
     })
     .catch((error) => console.error("Error fetching tokens:", error));
 }
-
-function displayTokens(data) {
-  const coingeckoIdEth = data.ethereum.map(x => x.coingeckoId);
+async function displayTokens(data) {
+  const coingeckoIdEth = data.ethereum.map((x) => x.coingeckoId);
   uniqueCoingeckoIdEth = [...new Set(coingeckoIdEth)];
 
-  const coingeckoIdBsc = data.bsc.map(x => x.coingeckoId);
+  const coingeckoIdBsc = data.bsc.map((x) => x.coingeckoId);
   uniqueCoingeckoIdBsc = [...new Set(coingeckoIdBsc)];
 
+  sharedTokens = uniqueCoingeckoIdEth.filter((token) =>
+    uniqueCoingeckoIdBsc.includes(token)
+  );
+  const coinsEther = data.ethereum.filter((token) =>
+    sharedTokens.includes(token.coingeckoId)
+  );
+  console.log(coinsEther);
+
+  let coundAmount = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+let caunt =1
+  for (const coin of coinsEther) {
+    console.log(caunt);
+    caunt++
+    const examinationPair = await examContract.getPair(
+      "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      coin.contract
+    );
+  console.log('coin.contract',coin.contract);
+  console.log('examinationPair', examinationPair);
   
-  sharedTokens = uniqueCoingeckoIdEth.filter(token => uniqueCoingeckoIdBsc.includes(token));
-  const coinsEther = data.ethereum.filter(token => sharedTokens.includes(token.coingeckoId))
+    if (examinationPair === "0x0000000000000000000000000000000000000000") {
+      console.log("*******coin:", coin.name, "---- ne podhodit******");
+    } else {
+       try {
+        console.log("*******coin:", coin.name, "---- podhodit******");
+        console.log(coin.name, 'количество нулей:', coin.decimals);
   
-  console.log("Shared Tokens:", sharedTokens);
-  console.log("Coins Ether:", coinsEther);
+        for (const amount of coundAmount) {
+          // console.log('сумма покупки', amount);
+  
+          try {
+            let result = await getTokensForUSDT(amount, coin.contract, coin.decimals);
+            // console.log("coin name:", coin.name);
+            console.log(`Сумма покупки ${amount}$:`, result);
+          } catch (error) {
+            console.error(`Error for ${amount}$:`, error);
+          }
+        }
+  
+     
+      } catch (error) {
+        console.log("not avaliable", error);
+      }
+    }
+  }
+
 }
+document.getElementById("fetchTokens").addEventListener("click", fetchTokens);
